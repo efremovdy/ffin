@@ -28,9 +28,9 @@
       "header": "modi eligendi",
       "content": "Quam ut cumque. Autem recusandae dignissimos velit eveniet. Illo ea et facere.",
       "approver": "ivanov",
-      "resolution": "",
-      "comment": "",
-      "state": ""
+      "resolution": "approved",
+      "comment": "approve",
+      "state": 1
     },
     {
       "id": 2,

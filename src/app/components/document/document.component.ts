@@ -59,7 +59,7 @@ export class DocumentComponent implements OnInit, OnDestroy {
           this.alertService.success(data);
           setTimeout(() => {
             this.router.navigate(['/']);
-          }, 3000);
+          }, 2000);
         },
         error => {
           this.alertService.error(error);
