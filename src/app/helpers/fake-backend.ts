@@ -3,14 +3,14 @@ import { HttpRequest, HttpResponse, HttpHandler, HttpEvent, HttpInterceptor, HTT
 import { Observable, of, throwError } from 'rxjs';
 import { delay, mergeMap, materialize, dematerialize } from 'rxjs/operators';
 
-import { users } from 'server/users.json';
+import { users as usersFromJson } from 'server/users.json';
 
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
 
   constructor() {
     // set users from db json
-    localStorage.setItem('users', JSON.stringify(users));
+    localStorage.setItem('users', JSON.stringify(usersFromJson));
   }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
