@@ -1,20 +1,20 @@
-import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 
 import { AlertService, AuthService } from '../../services';
 
 @Component({ templateUrl: 'login.component.html' })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
+  private subscription: Subscription;
   loginForm: FormGroup;
   loading = false;
   submitted = false;
-  returnUrl: string;
 
   constructor(
     private formBuilder: FormBuilder,
-    private route: ActivatedRoute,
     private router: Router,
     private authService: AuthService,
     private alertService: AlertService
@@ -30,9 +30,6 @@ export class LoginComponent implements OnInit {
       username: ['', Validators.required],
       password: ['', Validators.required]
     });
-
-    // get return url from route parameters or default to '/'
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
 
   // convenience getter for easy access to form fields
@@ -47,15 +44,19 @@ export class LoginComponent implements OnInit {
     }
 
     this.loading = true;
-    this.authService.login(this.f.username.value, this.f.password.value)
+    this.subscription = this.authService.login(this.f.username.value, this.f.password.value)
       .pipe(first())
       .subscribe(
         data => {
-          this.router.navigate([this.returnUrl]);
+          this.router.navigate(['/']);
         },
         error => {
           this.alertService.error(error);
           this.loading = false;
         });
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 }

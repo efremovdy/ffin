@@ -17,7 +17,7 @@ for (var i = 1; i <= 20; i++) {
     id: i,
     header: faker.lorem.words(2),
     content: faker.lorem.sentences(3),
-    approver: randomUser.name,
+    approver: randomUser.username,
     resolution: '',
     comment: '',
     state: ''

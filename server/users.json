@@ -1,0 +1,24 @@
+{
+  "users": [{
+      "id": 1,
+      "username": "ivanov",
+      "password": "ivanov",
+      "firstName": "Jordan",
+      "lastName": "Ivanov"
+    },
+    {
+      "id": 2,
+      "username": "Lehner",
+      "password": "0EM15pRKzkskag9",
+      "firstName": "Kianna",
+      "lastName": "Jast"
+    },
+    {
+      "id": 3,
+      "username": "Jerde",
+      "password": "wKcWIsn2puctEnr",
+      "firstName": "Leola",
+      "lastName": "Hermiston"
+    }
+  ]
+}

@@ -1,45 +1,32 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { first } from 'rxjs/operators';
 
-import { User } from '../../models';
-import { AuthService } from '../../services';
+import { DocumentsService } from '../../services';
+import { Document } from '../../models';
 
 @Component({
   templateUrl: 'documents.component.html'
 })
 export class DocumentsComponent implements OnInit, OnDestroy {
-  currentUser: User;
-  currentUserSubscription: Subscription;
-  users: User[] = [];
+  subscription: Subscription;
+  documents: Document[] = [];
 
   constructor(
-    private authService: AuthService,
-    //private userService: UserService
-  ) {
-    this.currentUserSubscription = this.authService.currentUser.subscribe(user => {
-      this.currentUser = user;
-    });
-  }
+    private documentsService: DocumentsService
+  ) { }
 
   ngOnInit() {
-    //this.loadAllUsers();
+    this.getDocuments();
   }
 
   ngOnDestroy() {
-    // unsubscribe to ensure no memory leaks
-    this.currentUserSubscription.unsubscribe();
+    this.subscription.unsubscribe();
   }
 
-  /* deleteUser(id: number) {
-    this.userService.delete(id).pipe(first()).subscribe(() => {
-      this.loadAllUsers()
-    });
+  private getDocuments() {
+    this.subscription = this.documentsService.getDocuments()
+      .subscribe((documents: Document[]) => {
+        this.documents = documents;
+      });
   }
-
-  private loadAllUsers() {
-    this.userService.getAll().pipe(first()).subscribe(users => {
-      this.users = users;
-    });
-  } */
 }

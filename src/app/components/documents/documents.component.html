@@ -1,1 +1,7 @@
 <h2>Documents</h2>
+<div class="list-group">
+  <a *ngFor="let doc of documents" [routerLink]="['/document', doc.id]" class="list-group-item list-group-item-action"
+    [ngClass]="{'list-group-item-success': doc.state === 1, 'list-group-item-danger': doc.state === 0}">
+    {{ doc.header }}
+  </a>
+</div>
