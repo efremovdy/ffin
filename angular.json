@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "ffin"
+    }
+  },
+  "defaultProject": "ffin",
+  "cli": {
+    "analytics": false
+  }
 }
